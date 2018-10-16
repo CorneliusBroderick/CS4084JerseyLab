@@ -38,6 +38,17 @@ public class Jersey {
     return mPlayerName;
   }
 
+  public int getPlayerNumber() {
+    return mPlayerId;
+  }
+
+  public void setName(String PlayerName) {
+    mPlayerName = PlayerName;
+  }
+
+  public void setPlayerNumber(int PlayerNumber) {
+    mPlayerId = PlayerNumber;
+  }
 
   public int getImageResourceId() {
     return mImageResourceId;
