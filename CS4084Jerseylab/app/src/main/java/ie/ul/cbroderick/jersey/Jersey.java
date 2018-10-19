@@ -9,25 +9,43 @@ import java.util.Random;
 public class Jersey {
 
   private String mPlayerName = "ANDROID";
-  private int mPlayerId = 17; 
+  private int mPlayerId = 17;
   private String mJerseyType;
+  private boolean mJerseyTypeGreen;
+  private boolean mJerseyTypePurple;
+
   private int mImageResourceId;
   private Random random = new Random();
 
   public static final HashMap<String, Integer> sJerseyImageMap;
   static {
     sJerseyImageMap = new HashMap<>();
-    sJerseyImageMap.put("Blue BasketBall Jersey", R.drawable.blue_jersey);
+
     sJerseyImageMap.put("Green Hurling Jersey", R.drawable.green_jersey);
     sJerseyImageMap.put("Purple Hurling Jersey", R.drawable.purple_jersey);
-    sJerseyImageMap.put("Blue BasketBall Jersey", R.drawable.red_jersey);
+
 
   }
 
   public Jersey() {
     mJerseyType = getRandomJerseyName();
     mImageResourceId = sJerseyImageMap.get(mJerseyType);
+
+    if (mJerseyType == "Green Hurling Jersey"){
+      mJerseyTypeGreen = true;
+      mJerseyTypePurple = false;
+    }
+
+    if (mJerseyType == "Purple Hurling Jersey"){
+      mJerseyTypeGreen = false;
+      mJerseyTypePurple = true;
+    }
+
   }
+  public Jersey getDefaultJersey(){
+    return new Jersey();
+  };
+
 
   private String getRandomJerseyName() {
     Object[] jerseys = Jersey.sJerseyImageMap.keySet().toArray();

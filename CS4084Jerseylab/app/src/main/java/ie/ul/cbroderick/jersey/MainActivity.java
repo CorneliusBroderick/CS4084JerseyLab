@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mNameTextView, mNumberTextView, mColour;
+    private TextView mNameTextView, mNumberTextView;
+    private Jersey mCurrentJersey;
+
+    // TODO: mColour boolean GREEN PURPLE true/false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // For now just practice showing an item
+                //mCurrentJersey = new Jersey.getDefaultJersey();
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
