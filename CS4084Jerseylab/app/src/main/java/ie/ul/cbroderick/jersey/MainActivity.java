@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         mNameTextView = findViewById(R.id.name_text);
         mNumberTextView = findViewById(R.id.number_text);
 
+        mCurrentJersey = new Jersey();
+        mCurrentJersey.setName("ANDROID");
+        mCurrentJersey.setPlayerNumber(17);
 
         // Boilerplate code. Don't mess with it.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,25 +44,22 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addJersey();
+                insertJersey();
             }
         });
+        showCurrentItem();
     }
 
-    private void addJersey() {
+    private void insertJersey() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        //Customize the dialog for needs.
-//        builder.setTitle("My title");
-//        builder.setMessage("Hello");
-//        builder.setPositiveButton("OK", null);
-//        builder.setNegativeButton("Cancel", null);
-
         View view = getLayoutInflater().inflate(R.layout.dialog_add, null, false);
         builder.setView(view);
 
         final EditText namedEditText = view.findViewById(R.id.edit_name_dialog);
         final EditText numberEditText = view.findViewById(R.id.edit_number_dialog);
+
+        namedEditText.setText(mCurrentJersey.getName());
+        numberEditText.setText("" + mCurrentJersey.getPlayerNumber());
 
         builder.setNegativeButton(android.R.string.cancel, null);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -68,15 +68,17 @@ public class MainActivity extends AppCompatActivity {
                 String name = namedEditText.getText().toString();
                 int newNumber = Integer.parseInt(numberEditText.getText().toString());
 
-                mCurrentJersey = new Jersey(name, newNumber);
-
+                mCurrentJersey.setName(name);
+                mCurrentJersey.setPlayerNumber(newNumber);
+                showCurrentItem();
             }
         });
         builder.create().show();
     }
 
     private void showCurrentItem() {
-
+        mNumberTextView.setText(getString(R.string.number_start, mCurrentJersey.getPlayerNumber()));
+        mNameTextView.setText(getString(R.string.name_start,mCurrentJersey.getName()));
     }
 
     @Override
@@ -106,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         if (id ==R.id.action_reset) {
             mClearedJersey = mCurrentJersey;
             mCurrentJersey = new Jersey();
+            mCurrentJersey.setName("ANDROID");
+            mCurrentJersey.setPlayerNumber(17);
+
             showCurrentItem();
             Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_layout),
                     "Item cleared", Snackbar.LENGTH_LONG);

@@ -29,6 +29,8 @@ public class Jersey {
     }
 
     public Jersey() {
+
+
         mJerseyType = getRandomJerseyName();
         mImageResourceId = sJerseyImageMap.get(mJerseyType);
 
