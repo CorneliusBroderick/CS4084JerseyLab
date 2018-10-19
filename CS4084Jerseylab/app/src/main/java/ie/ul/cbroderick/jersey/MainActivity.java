@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,10 +54,17 @@ public class MainActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.dialog_add, null, false);
         builder.setView(view);
 
-        builder.setNegativeButton(android.R.string.cancel,null);
+        final EditText namedEditText = view.findViewById(R.id.edit_name_dialog);
+        final EditText numberEditText = view.findViewById(R.id.edit_number_dialog);
+
+        builder.setNegativeButton(android.R.string.cancel, null);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String name = namedEditText.getText().toString();
+                int newNumber = Integer.parseInt(numberEditText.getText().toString());
+
+                mCurrentJersey = new Jersey(name, newNumber);
 
             }
         });
