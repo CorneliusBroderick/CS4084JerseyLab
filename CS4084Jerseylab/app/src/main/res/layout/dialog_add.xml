@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Jersey Info"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/fab_margin"/>
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name" />
+        <EditText
+            android:id="@+id/edit_name_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ANDROID"
+            android:inputType="textCapCharacters" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number" />
+    <EditText
+        android:id="@+id/edit_number_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="17"
+        android:inputType="number" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Green"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Purple"
+        />
+    </LinearLayout>
+
+
+</LinearLayout>

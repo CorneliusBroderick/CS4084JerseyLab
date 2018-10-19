@@ -1,5 +1,6 @@
 package ie.ul.cbroderick.jersey;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,14 +45,22 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Customize the dialog for needs.
-        builder.setTitle("My title");
-        builder.setMessage("Hello");
-        builder.setPositiveButton("OK", null);
-        builder.setNegativeButton("Cancel", null);
+//        builder.setTitle("My title");
+//        builder.setMessage("Hello");
+//        builder.setPositiveButton("OK", null);
+//        builder.setNegativeButton("Cancel", null);
 
+        View view = getLayoutInflater().inflate(R.layout.dialog_add, null, false);
+        builder.setView(view);
+
+        builder.setNegativeButton(android.R.string.cancel,null);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
         builder.create().show();
-
-
     }
 
     private void showCurrentItem() {

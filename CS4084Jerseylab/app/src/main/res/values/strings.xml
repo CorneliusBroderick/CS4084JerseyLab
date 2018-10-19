@@ -4,4 +4,5 @@
     <string name="actions_reset">reset</string>
     <string name="name_start">ANDROID</string>
     <string name="number_start">17</string>
+    <string name="name">Name</string>
 </resources>
