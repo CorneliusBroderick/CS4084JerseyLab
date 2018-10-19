@@ -3,6 +3,7 @@ package ie.ul.cbroderick.jersey;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -34,14 +35,27 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // For now just practice showing an item
-                //mCurrentJersey = new Jersey.getDefaultJersey();
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                addJersey();
             }
         });
+    }
+
+    private void addJersey() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //Customize the dialog for needs.
+        builder.setTitle("My title");
+        builder.setMessage("Hello");
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("Cancel", null);
+
+        builder.create().show();
+
+
+    }
+
+    private void showCurrentItem() {
+
     }
 
     @Override

@@ -42,7 +42,7 @@ public class Jersey {
     }
 
   }
-  public Jersey getDefaultJersey(){
+  public static Jersey getDefaultJersey(){
     return new Jersey();
   };
 
