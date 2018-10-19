@@ -1,7 +1,9 @@
 package ie.ul.cbroderick.jersey;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mNameTextView, mNumberTextView;
     private Jersey mCurrentJersey;
+    private Jersey mClearedJersey;
+
 
     // TODO: mColour boolean GREEN PURPLE true/false;
 
@@ -94,8 +98,31 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+
             return true;
         }
+
+        if (id ==R.id.action_reset) {
+            mClearedJersey = mCurrentJersey;
+            mCurrentJersey = new Jersey();
+            showCurrentItem();
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_layout),
+                    "Item cleared", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentJersey = mClearedJersey;
+                    showCurrentItem();
+                    Snackbar.make(findViewById(R.id.coordinator_layout),
+                            "Item restored", Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            snackbar.show();
+            return true;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
