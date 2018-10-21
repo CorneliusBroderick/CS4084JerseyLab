@@ -2,6 +2,7 @@ package ie.ul.cbroderick.jersey;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean saved_color_state;
 
 
+    // Constants:
+    private final static String PREFS = "PREFS";
+    private static final String KEY_JERSEY_NAME = "KEY_JERSEY_NAME";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +41,14 @@ public class MainActivity extends AppCompatActivity {
         mNumberTextView = findViewById(R.id.number_text);
 
         mCurrentJersey = new Jersey();
-        mCurrentJersey.setName("ANDROID");
+
         mCurrentJersey.setPlayerNumber(17);
 
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        String name = "ANDROID";
+        name = prefs.getString(KEY_JERSEY_NAME,getString(R.string.name_start));
+        mCurrentJersey.setName(name);
+        // TODO: Get the other fields. Then use them all
 
         // Boilerplate code. Don't mess with it.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -153,6 +164,17 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_JERSEY_NAME, mCurrentJersey.getName());
+// Put the other fields into the editor
+        editor.commit();
+    }
+
 
     public void handlePurpleJersey(View view) {
         ImageView image = findViewById(R.id.my_image);
