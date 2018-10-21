@@ -41,16 +41,28 @@ public class MainActivity extends AppCompatActivity {
 
         mNameTextView = findViewById(R.id.name_text);
         mNumberTextView = findViewById(R.id.number_text);
+        ImageView image = findViewById(R.id.my_image);
 
         mCurrentJersey = new Jersey();
 
         mCurrentJersey.setPlayerNumber(17);
+
 
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         String name = "ANDROID";
         name = prefs.getString(KEY_JERSEY_NAME,getString(R.string.name_start));
         mCurrentJersey.setName(name);
         // TODO: Get the other fields. Then use them all
+        mCurrentJersey.setPlayerNumber(number);
+        mPurpleColour = prefs.getBoolean(KEY_JERSEY_COLOUR, false);
+
+        if (mPurpleColour == true) {
+            image.setImageResource(R.drawable.purple_jersey);
+        }
+        else{
+            image.setImageResource(R.drawable.green_jersey);
+        }
+
 
         // Boilerplate code. Don't mess with it.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,15 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText namedEditText = view.findViewById(R.id.edit_name_dialog);
         final EditText numberEditText = view.findViewById(R.id.edit_number_dialog);
-        //final Button purpleButton = view.findViewById(R.id.purple_Button);
-
-//        if (mPurpleColour == true) {
-//            purpleButton.setText("Purple");
-//
-//        }
-//        else{
-//            purpleButton.setText("Green");
-//        }
 
         namedEditText.setText(mCurrentJersey.getName());
         numberEditText.setText("" + mCurrentJersey.getPlayerNumber());
@@ -103,8 +106,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showCurrentItem() {
+
+        ImageView image = findViewById(R.id.my_image);
         mNumberTextView.setText(getString(R.string.number_start, mCurrentJersey.getPlayerNumber()));
         mNameTextView.setText(getString(R.string.name_start,mCurrentJersey.getName()));
+        if (mPurpleColour == true) {
+            image.setImageResource(R.drawable.purple_jersey);
+        }
+        else{
+            image.setImageResource(R.drawable.green_jersey);
+        }
     }
 
     @Override
@@ -133,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id ==R.id.action_reset) {
             mClearedJersey = mCurrentJersey;
+            saved_color_state = mPurpleColour;
             mPurpleColour = false;
             mCurrentJersey = new Jersey();
             mCurrentJersey.setName("ANDROID");
@@ -153,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mCurrentJersey = mClearedJersey;
+                    mPurpleColour = saved_color_state;
+
                     showCurrentItem();
                     Snackbar.make(findViewById(R.id.coordinator_layout),
                             "Item restored", Snackbar.LENGTH_SHORT).show();
