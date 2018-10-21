@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         mCurrentJersey = new Jersey();
 
-        mCurrentJersey.setPlayerNumber(17);
 
 
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
@@ -53,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         name = prefs.getString(KEY_JERSEY_NAME,getString(R.string.name_start));
         mCurrentJersey.setName(name);
         // TODO: Get the other fields. Then use them all
+        Integer number =17;
+        number = prefs.getInt(KEY_JERSEY_NUMBER, -1);
         mCurrentJersey.setPlayerNumber(number);
         mPurpleColour = prefs.getBoolean(KEY_JERSEY_COLOUR, false);
 
