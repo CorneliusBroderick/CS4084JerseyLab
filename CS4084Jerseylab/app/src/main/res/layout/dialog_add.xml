@@ -43,7 +43,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <Button
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Purple Jersey" />
+
+    <ToggleButton
         android:id="@+id/purple_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
