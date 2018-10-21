@@ -9,10 +9,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,9 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView mNameTextView, mNumberTextView;
     private Jersey mCurrentJersey;
     private Jersey mClearedJersey;
+    private boolean mPurpleColour = false;
+    private boolean saved_color_state;
 
 
-    // TODO: mColour boolean GREEN PURPLE true/false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mCurrentJersey = new Jersey();
         mCurrentJersey.setName("ANDROID");
         mCurrentJersey.setPlayerNumber(17);
+
 
         // Boilerplate code. Don't mess with it.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText namedEditText = view.findViewById(R.id.edit_name_dialog);
         final EditText numberEditText = view.findViewById(R.id.edit_number_dialog);
+        //final Button purpleButton = view.findViewById(R.id.purple_Button);
+
+//        if (mPurpleColour == true) {
+//            purpleButton.setText("Purple");
+//
+//        }
+//        else{
+//            purpleButton.setText("Green");
+//        }
 
         namedEditText.setText(mCurrentJersey.getName());
         numberEditText.setText("" + mCurrentJersey.getPlayerNumber());
@@ -70,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mCurrentJersey.setName(name);
                 mCurrentJersey.setPlayerNumber(newNumber);
+
                 showCurrentItem();
             }
         });
@@ -107,9 +120,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (id ==R.id.action_reset) {
             mClearedJersey = mCurrentJersey;
+            mPurpleColour = false;
             mCurrentJersey = new Jersey();
             mCurrentJersey.setName("ANDROID");
             mCurrentJersey.setPlayerNumber(17);
+            ImageView image = findViewById(R.id.my_image);
+            if (mPurpleColour == true) {
+                image.setImageResource(R.drawable.purple_jersey);
+            }
+            else{
+                image.setImageResource(R.drawable.green_jersey);
+            }
+
 
             showCurrentItem();
             Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_layout),
@@ -130,5 +152,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void handlePurpleJersey(View view) {
+        ImageView image = findViewById(R.id.my_image);
+
+
+        mPurpleColour = !mPurpleColour;
+        if (mPurpleColour == true) {
+            image.setImageResource(R.drawable.purple_jersey);
+        }
+        else{
+            image.setImageResource(R.drawable.green_jersey);
+        }
     }
 }
