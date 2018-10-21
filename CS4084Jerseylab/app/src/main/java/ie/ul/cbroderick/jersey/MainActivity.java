@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     // Constants:
     private final static String PREFS = "PREFS";
     private static final String KEY_JERSEY_NAME = "KEY_JERSEY_NAME";
+    private static final String KEY_JERSEY_NUMBER = "KEY_JERSEY_NUMBER";
+    private static final String KEY_JERSEY_COLOUR = "KEY_JERSEY_COLOUR";
 
 
 
@@ -171,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_JERSEY_NAME, mCurrentJersey.getName());
+        editor.putInt(KEY_JERSEY_NUMBER, mCurrentJersey.getPlayerNumber());
+        editor.putBoolean(KEY_JERSEY_COLOUR, mPurpleColour);
 // Put the other fields into the editor
         editor.commit();
     }
